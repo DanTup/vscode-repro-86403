@@ -1,0 +1,88 @@
+{
+	"name": "dart-code-issue-repro",
+	"displayName": "Issue Repro",
+	"description": "Issue repro.",
+	"version": "3.4.0-dev",
+	"publisher": "issue-repro",
+	"engines": {
+		"vscode": "^1.36.0"
+	},
+	"extensionKind": "workspace",
+	"license": "SEE LICENSE IN LICENSE",
+	"bugs": {
+		"url": "https://github.com/Dart-Code/Dart-Code/issues"
+	},
+	"homepage": "https://dartcode.org/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Dart-Code/Dart-Code.git"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"bug"
+	],
+	"icon": "media/dart.png",
+	"activationEvents": [
+		"onLanguage:dart",
+		"workspaceContains:**/pubspec.yaml",
+		"workspaceContains:**/*.dart"
+	],
+	"main": "./out/dist/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "dart",
+				"extensions": [
+					".dart"
+				],
+				"aliases": [
+					"Dart"
+				],
+				"configuration": "./syntaxes/dart-language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "dart",
+				"scopeName": "source.dart",
+				"path": "./syntaxes/dart.json"
+			}
+		],
+		"breakpoints": [
+			{
+				"language": "dart"
+			}
+		]
+	},
+	"scripts": {
+		"build": "webpack --mode development",
+		"build-tests": "tsc -p ./",
+		"build-all": "npm run build && npm run build-tests",
+		"test": "npm run build && npm run build-tests && npm run test-only",
+		"test-only": "node ./out/src/test/test_all.js"
+	},
+	"dependencies": {
+		"minimatch": "^3.0.4",
+		"semver": "^6.3.0",
+		"vscode-debugadapter": "^1.35.0",
+		"vscode-debugprotocol": "^1.35.0"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/minimatch": "^3.0.3",
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^10.14.15",
+		"@types/semver": "^6.0.1",
+		"@types/vscode": "^1.36.0",
+		"glob": "^7.1.4",
+		"mocha": "^5.2.0",
+		"source-map-support": "^0.5.13",
+		"ts-loader": "^6.0.4",
+		"typescript": "^3.5.2",
+		"vscode-test": "^1.2.0",
+		"webpack": "^4.39.1",
+		"webpack-cli": "^3.3.5"
+	}
+}
