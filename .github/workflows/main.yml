@@ -16,7 +16,7 @@ jobs:
         dart-version: [stable]
         code-version: [stable]
         flutter-version: [stable]
-        bot: [one]
+        bot: [one, two, three, four, five, size, seven, eight, nine, ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen, twenty]
         
     steps:
 
