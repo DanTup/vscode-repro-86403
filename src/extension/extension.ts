@@ -10,4 +10,14 @@ export function activate(context: vs.ExtensionContext) {
 	const codeActionProvider = new TestCodeActionProvider();
 	context.subscriptions.push(codeActionProvider);
 	context.subscriptions.push(vs.languages.registerCodeActionsProvider(DART_MODE, codeActionProvider));
+
+	// Make the extension host busier.
+	function busy() {
+		// Block the extension host periodically for a short period
+		// (this could be other extensions doing computation or sync fs work)
+		for (let i = 0; i < 10000000; i++) {
+		}
+		setTimeout(busy, 5);
+	}
+	setTimeout(busy, 0);
 }
