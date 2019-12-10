@@ -9,7 +9,7 @@ export const emptyFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "lib/emp
 export const helloWorldTestMainFile = vs.Uri.file(path.join(helloWorldFolder.fsPath, "test/basic_test.dart"));
 
 
-describe(`test_code_lens`, () => {
+describe(`test_code_actions`, () => {
 	console.info(`Starting tests!`);
 	before("activate", () => ext.activate());
 
@@ -18,13 +18,13 @@ describe(`test_code_lens`, () => {
 			const doc = await vs.workspace.openTextDocument(helloWorldTestMainFile);
 			await vs.window.showTextDocument(doc);
 
-			const fileCodeLens = await (vs.commands.executeCommand("vscode.executeCodeLensProvider", doc.uri, 500) as Thenable<vs.CodeLens[]>);
-			console.info(`On attempt ${attempt}, got ${fileCodeLens.length} code lens`);
+			const codeActions = await (vs.commands.executeCommand("vscode.executeCodeActionProvider", doc.uri, new vs.Range(new vs.Position(0, 0), new vs.Position(0, 0))) as Thenable<vs.CodeAction[]>);
+			console.info(`On attempt ${attempt}, got ${codeActions.length} code actions`);
 
-			for (const cl of fileCodeLens) {
-				if (!cl.command) {
-					console.error(`On attempt ${attempt}, got a code lens without any command! ${JSON.stringify(cl, undefined, 4)}`);
-					throw new Error(`On attempt ${attempt}, got a code lens without any command! ${JSON.stringify(cl, undefined, 4)}`);
+			for (const ca of codeActions) {
+				if (!ca.command) {
+					console.error(`On attempt ${attempt}, got a code action without any command! ${JSON.stringify(ca, undefined, 4)}`);
+					throw new Error(`On attempt ${attempt}, got a code action without any command! ${JSON.stringify(ca, undefined, 4)}`);
 				}
 			}
 		});
