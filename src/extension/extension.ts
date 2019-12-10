@@ -13,9 +13,9 @@ export function activate(context: vs.ExtensionContext) {
 
 	// Make the extension host busier.
 	function busy() {
-		// Block the extension host periodically for a short period
-		// (this could be other extensions doing computation or sync fs work)
-		for (let i = 0; i < 10000000; i++) {
+		// Block for 100ms
+		var currentTime = new Date().getTime();
+		while (currentTime + 100 >= new Date().getTime()) {
 		}
 		setTimeout(busy, 5);
 	}
